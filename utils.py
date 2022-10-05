@@ -97,3 +97,11 @@ def overlapped_bar(y_df,x1_df,x2_df, xlabel,ylabel,title):
     ax.set_title("Total Orders and Reorders From Most Popular Aisles")
     ax.legend(loc = 4, prop={'size': 12})
     plt.show()
+    
+# Annotate text on graph
+def annotate_text(ax, append_to_text='%'):
+    for p in ax.patches:
+        txt = str(p.get_height().round(2)) + append_to_text
+        txt_x = p.get_x() + p.get_width()/2.
+        txt_y = 0.92*p.get_height()
+        ax.text(txt_x,txt_y,txt, fontsize=20, color='#004235', ha='center', va='bottom')
