@@ -1,4 +1,8 @@
 #Evaluation metric implemented for NN
+import tensorflow.compat.v1.keras.backend as K 
+import tensorflow as tf
+tf.compat.v1.disable_eager_execution()
+
 def recall_metric(y_true, y_pred):
     true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
     possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
