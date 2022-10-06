@@ -21,14 +21,17 @@ Instacart is an American technology company that operates grocery delivery and p
 ```
 .
 ├── figures/                                    : Directory containing all plots 
-├── Data Description and Analysis.ipynb         : Initial analysis to understand data
+├── Data Description and Overview.ipynb         : Initial analysis to understand data
 ├── Exploratory Data Analysis.ipynb             : EDA to analyze customer purchase pattern
-├── Customers Segmentation.ipynb                : Customer Segmentation based on product aisles
+├── Customers Segmentation and Profiling .ipynb                : Customer Segmentation based on product aisles
 ├── Market Basket Analysis.ipynb                : Market Basket Analysis to find products association
-├── Feature Extraction.ipynb                    : Feature engineering and extraction for a ML model
-├── preprocessing.py.                           : Data preparation for modeling
+└── utils.py                                    : Script containing helper functions for memory optimization and EDA
+└── modeling_utils.py                           : Script containing utility functions for modeling
+├── feature_extraction.py                       : Feature engineering and extraction for a ML model
+├── preprocessing.py                            : Data preparation for modeling
 ├── LICENSE                                     : License
 └── README.md                                   : Project Report 
+
 ```
 <br />
  
