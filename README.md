@@ -15,3 +15,20 @@ Instacart is an American technology company that operates grocery delivery and p
 - Can we use association mining and machine learning to understand groceries purchase? 
 - Can we predicting products that a user will buy again, try for the first time or add to cart next during a session?
 - Can we optimize marketing and aisle packaging given the associative behaviours of customers for certain products?
+
+
+### Project Organization
+```
+.
+├── figures/                                    : Directory containing all plots 
+├── Data Description and Analysis.ipynb         : Initial analysis to understand data
+├── Exploratory Data Analysis.ipynb             : EDA to analyze customer purchase pattern
+├── Customers Segmentation.ipynb                : Customer Segmentation based on product aisles
+├── Market Basket Analysis.ipynb                : Market Basket Analysis to find products association
+├── Feature Extraction.ipynb                    : Feature engineering and extraction for a ML model
+├── preprocessing.py.                           : Data preparation for modeling
+├── LICENSE                                     : License
+└── README.md                                   : Project Report 
+```
+<br />
+ 
