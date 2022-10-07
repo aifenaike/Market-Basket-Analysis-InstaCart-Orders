@@ -34,6 +34,61 @@ Instacart is an American technology company that operates grocery delivery and p
 
 ```
 <br />
+
+
+## Market Basket Analysis
+
+A modeling technique called market basket analysis is based on the idea that you are either more or less likely to buy one group of goods after purchasing another. Market basket analysis may give the store details about a customer's purchasing habits. In addition to impacting sales promotions, loyalty programs, store layout, and discount schemes, this information can also be used for cross-selling and up-selling.
+
+Market basket analysis examines the items that customers frequently purchase together and analyzes the data to determine which products should be promoted or marketed cross-sell. The phrase refers to the amount of groceries that supermarket patrons load into their trolleys when out shopping.
+
+When attempting to identify a relationship between various items in a collection or identify recurring patterns in a transaction database, relational database, or other information repository, association rule mining is used.
+
+The method used by major retailers like Amazon, Flipkart, and others to analyze customer purchasing patterns by identifying associations between the various items that customers place in their "shopping baskets" is known as market basket analysis, and it is the most popular method for discovering these patterns. The identification of these relationships can assist merchants in creating marketing plans by providing information on the products that customers typically buy in tandem. The tactics could consist of:
+
+- Changing the store layout according to trends
+- Customers behavior analysis
+- Catalog Design
+- Cross marketing on online stores
+- Customized emails with add-on sales, etc.
+
+### Metrics
+
+**Support** : Its the default popularity of an item. In mathematical terms, the support of item A is the ratio of transactions involving A to the total number of transactions.
+
+**Confidence** : Likelihood that customer who bought both A and B. It is the ratio of the number of transactions involving both A and B and the number of transactions involving B.
+- Confidence(A => B) = Support(A, B)/Support(B)
+
+**Lift** : Increase in the sale of A when you sell B.
+- Lift(A => B) = Confidence(A, B)/Support(B)
+      
+- Lift (A => B) = 1 means that there is no correlation within the itemset.
+- Lift (A => B) > 1 means that there is a positive correlation within the itemset, i.e., products in the itemset, A, and B, are more likely to be bought together.
+- Lift (A => B) < 1 means that there is a negative correlation within the itemset, i.e., products in itemset, A, and B, are unlikely to be bought together.
+
+**Apriori Algorithm:**  Apriori algorithm assumes that any subset of a frequent itemset must be frequent. It is the underlying Market Basket Analysis algorithm used in this project. Let's say that a transaction that has "Apples, Mango, Grapes" also contains "Grapes, Mango." Therefore, if "Grapes, Apple, Mango" are often, then "Grapes, Mango" must likewise be frequent, according to the a priori principle.
+
+I used the apriori method from the `Mlxtend` Python library to identify associations between the top 100 most common items, and as a result, 28 product pairs (a total of 56 rules) with lift greater than 1 were identified. Following are the top 10 product combos with the highest lift:
+
+
+| Product A  | Product B | Lift |
+| ------------- | ------------- | ---- |
+| Limes  | Large Lemons  | 3 |
+| Organic Strawberries | Organic Raspberries | 2.21 |
+| Organic Avocado | Large Lemon | 2.12 |
+| Organic Strawberries | Organic Blueberries | 2.11 |
+| Organic Hass Avocado | Organic Raspberries | 2.08 |
+| Banana | Organic Fuji Apple | 1.88 |
+| Bag of Organic Bananas | Organic Raspberries | 1.83 |
+| Organic Hass Avocado | Bag of Organic Bananas | 1.81 |
+| Honeycrisp Apple | Banana | 1.77 |
+| Organic Avocado | Organic Baby Spinach | 1.70 |
+
+
+## ML Model to Predict Product Reorders
+
+We can utilize this anonymized transactional data of customer orders over time to predict which previously purchased products will be in a user’s next order. This would help recommend the products to a user. 
+
  
  ### ML Models
 
