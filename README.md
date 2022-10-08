@@ -25,8 +25,9 @@ Instacart is an American technology company that operates grocery delivery and p
 ├── Exploratory Data Analysis.ipynb             : EDA to analyze customer purchase pattern
 ├── Customers Segmentation and Profiling .ipynb    : Customer Segmentation based on product aisles
 ├── Market Basket Analysis.ipynb                : Market Basket Analysis to find products association
-└── utils.py                                    : Script containing helper functions for memory optimization and EDA
-└── modeling_utils.py                           : Script containing utility functions for modeling
+├── Modeling_ensemble.ipynb                     : Predict customer reorder tendencies using CatBoost
+├── utils.py                                    : Script containing helper functions for memory optimization and EDA
+├── modeling_utils.py                           : Script containing utility functions for modeling
 ├── feature_extraction.py                       : Feature engineering and extraction for a ML model
 ├── preprocessing.py                            : Data preparation for modeling
 ├── LICENSE                                     : License
@@ -35,6 +36,33 @@ Instacart is an American technology company that operates grocery delivery and p
 ```
 <br />
 
+## Customer Segmentation and Profiling
+
+Customer segmentation is the practice of classifying customers into groups based on shared traits so that businesses may effectively and appropriately market to each group. Utilizing information on the things that consumers purchase, we can segment the population. I used aisles that symbolize different product categories because there are thousands of customers and hundreds of thousands of products.
+
+As KMeans does not work well on higher dimensions, I then used principal component analysis to minimize the number of dimensions. I performed KMeans clustering using 10 major components. With the use of the Elbow approach, I determined that five clusters was the ideal quantity.
+
+<p align="center">
+  <img width="600" height="300" src="https://github.com/aifenaike/Market-Basket-Analysis-InstaCart-Orders/blob/main/figure/Optimal_k.png">
+</p>
+
+The clustering can be visualized along first two principal components as below.
+
+<p align="center">
+  <img width="600" height="400" src="https://github.com/aifenaike/Market-Basket-Analysis-InstaCart-Orders/blob/main/figure/Cluster_Segments.png">
+</p>
+
+The clustering results into 5 customer cohorts and after checking most frequent products in them. I noticed some distinctions between the clusters:
+
+- Customers in cohort 1 buy more `fresh vegetables` and `fruits` than the other clusters. As shown by absolute data, Cohort 1 is also the cluster including those customers buying far more goods than any others.
+
+- Customers in cohort 2 buy more `chips pretzels` than people of the other clusters.
+
+- Customers in cohort 3 buy the least amount of `packaged cheese` and `milk` than people of the other clusters. However, this cohort represents customers with the most purchase in `water seltzer sparkling water`.
+
+- Absolute Data shows us customers in cohort 3 buy a lot of `soft drinks` which is not even listed in the top 8 products but mainly characterize this cluster. Coherently given that they also purchase `water seltzer sparkling water` than the others, I believe that they buy more consumable liquid products than the others.
+
+- The mean orders for customers in cohort 5 are low compared to other clusters which tells us that either they are not frequent users of Instacart or they are new users and do not have many orders yet.
 
 ## Market Basket Analysis
 
@@ -94,7 +122,7 @@ We can utilize this anonymized transactional data of customer orders over time t
 
 Using the extracted features, I created a dataframe with all the products the user has previously purchased, user level level features, product level features, asile and department level features, user-product level features, and information about the current order like the day of the week, hour of the day, etc.  The Target variable would be 'reordered' which shows how many of the previously purchased items, user ordered a particular product.
 
-Due to the size of the dataframe, I downcast it to reduce memory usage and fit the data into my memory. Because StandardScaler needs 16 GB of RAM to function, I picked MinMaxScaler. I used CatBoost to handle the enormous amounts of data, because it can be parallelized (ensemble), assigns feature priority, and follows a regular approach for generating models. In addition, I constructed a neural network to determine how well this model would perform while ignoring some inherent unpredictability in both of these models. I used cost-sensitive optimization to balance the performance evaluation by giving the evaluation metric class weights.
+ I used CatBoost to handle the enormous amounts of data, because it can be parallelized (ensemble), assigns feature priority, and follows a regular approach for generating models. In addition, I constructed a neural network to determine how well this model would perform while ignoring some inherent unpredictability in both of these models. I used cost-sensitive optimization to balance the performance evaluation by giving the evaluation metric class weights.
 
 By adjusting the threshold, I was able to maximize the F1 score. For model evaluation, I also used the AUC Score and logloss. Below is a performance comparison of both of these models utilizing the classification report, ROC curve, and confusion matrix. To comprehend significant features that aid in predicting product reorder, the feature critical plot from the CatBoost model is also shown. Both models perform almost equally well, with CatBoost slightly outperforming the other in terms of ROC-AUC.
 
